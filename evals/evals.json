@@ -1,0 +1,170 @@
+{
+  "skill_name": "vibe-context-architect",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": 1,
+      "name": "next14-project-full-analysis",
+      "prompt": "My vibe-coded project is getting huge and AI keeps forgetting how I build things. I have a Next.js 14 app with TypeScript, Prisma, Tailwind, shadcn/ui, Zustand, TanStack Query, and Clerk auth. Files: src/app/ for routes, src/components/ for components (PascalCase named exports), src/services/ for all DB calls, src/store/ for Zustand. I use async/await everywhere, TanStack Query for all data fetching, and strict TypeScript (no any). My biggest AI pain: it keeps putting database queries directly in my route handlers instead of using my service layer, and it keeps adding 'use client' to everything. Can you build my AI context layer?",
+      "expected_output": "Should run all 5 phases. Generate CONTEXT.md with stack, SESSION-STARTER.md under 800 tokens, ANTI-PATTERNS.md with at least 'direct DB in routes' and 'use client everywhere' as guardrails, PATTERNS.md with Next.js App Router + TanStack Query patterns, DECISIONS.md with ADRs for key choices.",
+      "assertions": [
+        {
+          "id": "detects-stack",
+          "text": "Correctly identifies the full stack: Next.js 14, TypeScript, Prisma, Tailwind, shadcn, Zustand, TanStack Query, Clerk",
+          "type": "contains_concept",
+          "expected": "Next.js, Prisma, Zustand, TanStack Query, Clerk"
+        },
+        {
+          "id": "antipattern-db-in-routes",
+          "text": "ANTI-PATTERNS.md includes direct DB queries in route handlers as a guardrail",
+          "type": "contains_concept",
+          "expected": "service layer, direct database, route handler"
+        },
+        {
+          "id": "antipattern-use-client",
+          "text": "ANTI-PATTERNS.md includes over-using 'use client' as a guardrail",
+          "type": "contains_concept",
+          "expected": "use client, server component"
+        },
+        {
+          "id": "session-starter-fits-context",
+          "text": "SESSION-STARTER.md is concise and contains key conventions",
+          "type": "contains_concept",
+          "expected": "session starter, conventions, stack"
+        },
+        {
+          "id": "service-layer-pattern",
+          "text": "PATTERNS.md includes the service layer pattern for DB access",
+          "type": "contains_concept",
+          "expected": "service, src/services"
+        },
+        {
+          "id": "adr-generated",
+          "text": "DECISIONS.md contains at least one ADR",
+          "type": "contains_concept",
+          "expected": "ADR, decision, status"
+        },
+        {
+          "id": "all-6-files",
+          "text": "All 6 context files are generated",
+          "type": "contains_concept",
+          "expected": "CONTEXT.md, DECISIONS.md, PATTERNS.md, STYLE.md, SESSION-STARTER.md, ANTI-PATTERNS.md"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "conflict-detection-mixed-patterns",
+      "prompt": "I have a React + Vite project that started small. Looking at my code, some older files use default exports but newer files use named exports. Some files use .then() chains (old code) but my new files use async/await. I also have some fetch() calls and some axios calls mixed. My eslint has no-console set to error and no-explicit-any also error. Please analyze and help me decide which conventions to standardize on, then build my context layer.",
+      "expected_output": "Should detect conflicts in Phase 3 and surface them as numbered decisions for the user to resolve. Should ask: (1) named vs default exports, (2) async/await vs .then(), (3) fetch vs axios. Should NOT guess — must present options. After getting resolution, generate context with those decisions documented.",
+      "assertions": [
+        {
+          "id": "surfaces-conflicts",
+          "text": "Surfaces the naming/pattern conflicts and asks user to resolve them",
+          "type": "contains_concept",
+          "expected": "conflict, decision, which convention"
+        },
+        {
+          "id": "asks-export-style",
+          "text": "Specifically asks about named vs default exports",
+          "type": "contains_concept",
+          "expected": "export, named, default"
+        },
+        {
+          "id": "asks-async-pattern",
+          "text": "Asks about async/await vs .then() standardization",
+          "type": "contains_concept",
+          "expected": "async/await, .then, promise"
+        },
+        {
+          "id": "eslint-rules-extracted",
+          "text": "Extracts eslint rules (no-console, no-any) as hard constraints",
+          "type": "contains_concept",
+          "expected": "console, any, eslint, constraint"
+        },
+        {
+          "id": "legacy-code-noted",
+          "text": "Notes that legacy code violates conventions but new code should not",
+          "type": "contains_concept",
+          "expected": "legacy, older files, do not replicate"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "new-project-mode",
+      "prompt": "I'm starting a new SaaS side project from scratch. Stack: Next.js 14 App Router, TypeScript, Supabase (auth + database), Stripe for payments, Tailwind + shadcn/ui. I haven't written any code yet. Can you set up my AI context layer with best practices for this exact stack so future AI sessions start with good conventions?",
+      "expected_output": "Should detect --new-project mode (no existing code). Should use stack-presets.md for Next.js + Supabase + Stripe. Should generate opinionated starter conventions, ADRs explaining the stack choices, anti-patterns specific to Next.js + Supabase combo. SESSION-STARTER should be ready to use immediately.",
+      "assertions": [
+        {
+          "id": "new-project-mode-detected",
+          "text": "Detects new project mode and switches appropriately",
+          "type": "contains_concept",
+          "expected": "new project, no existing code, starter"
+        },
+        {
+          "id": "supabase-patterns",
+          "text": "Includes Supabase-specific patterns (RLS, auth helpers, etc.)",
+          "type": "contains_concept",
+          "expected": "Supabase, row level security, auth"
+        },
+        {
+          "id": "stripe-antipatterns",
+          "text": "Includes Stripe-specific guardrails (webhook security, idempotency)",
+          "type": "contains_concept",
+          "expected": "Stripe, webhook, secret"
+        },
+        {
+          "id": "ready-session-starter",
+          "text": "SESSION-STARTER.md is immediately usable with the stated stack",
+          "type": "contains_concept",
+          "expected": "Next.js, Supabase, Stripe, conventions"
+        },
+        {
+          "id": "adrs-for-new-project",
+          "text": "ADRs explain why each tech was chosen with context",
+          "type": "contains_concept",
+          "expected": "ADR, decision, Supabase, Stripe"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "update-mode-schema-change",
+      "prompt": "I already have .ai-context/ in my project. I've been adding features for 2 weeks. Main changes: added 3 new Prisma models (Organization, Membership, Invite), switched from Zustand to Jotai for state management (bad decision — reverting soon), added a new /api/webhooks/ route pattern, and found a bug where junior dev put direct Prisma calls in 3 route handlers. Can you update my context to reflect these changes?",
+      "expected_output": "Should detect existing .ai-context/ and run in update mode. Should update DECISIONS.md with new Org/Membership models and note the Jotai experiment as a temporary decision. Should add the webhook anti-pattern. Should add new route pattern to PATTERNS.md. Should flag the direct Prisma violation as a new anti-pattern entry.",
+      "assertions": [
+        {
+          "id": "detects-update-mode",
+          "text": "Detects existing .ai-context/ and suggests update vs rebuild",
+          "type": "contains_concept",
+          "expected": "existing context, update, incremental"
+        },
+        {
+          "id": "new-models-documented",
+          "text": "Documents new Organization, Membership, Invite models in CONTEXT.md",
+          "type": "contains_concept",
+          "expected": "Organization, Membership, Invite"
+        },
+        {
+          "id": "jotai-temporary-decision",
+          "text": "Documents Jotai switch as a temporary/under-review ADR",
+          "type": "contains_concept",
+          "expected": "Jotai, temporary, reverting"
+        },
+        {
+          "id": "new-antipattern-added",
+          "text": "Adds direct Prisma in routes as a new anti-pattern",
+          "type": "contains_concept",
+          "expected": "Prisma, route handler, anti-pattern"
+        },
+        {
+          "id": "webhook-pattern-added",
+          "text": "Adds webhook route pattern to PATTERNS.md",
+          "type": "contains_concept",
+          "expected": "webhook, route pattern"
+        }
+      ]
+    }
+  ]
+}

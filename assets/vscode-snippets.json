@@ -1,0 +1,72 @@
+{
+  "AI Context Starter": {
+    "prefix": "aicontext",
+    "description": "Paste your project's AI context starter at top of any new AI chat",
+    "body": [
+      "<!-- Paste .ai-context/SESSION-STARTER.md content here -->",
+      "$0"
+    ]
+  },
+  "New Decision (ADR)": {
+    "prefix": "adr",
+    "description": "Architecture Decision Record template",
+    "body": [
+      "## ADR-${1:NNN}: ${2:Decision Title}",
+      "",
+      "**Status:** ${3|Active,Superseded,Deprecated|}",
+      "**Date:** ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "",
+      "### Decision",
+      "${4:What was decided}",
+      "",
+      "### Context & Why",
+      "${5:Why this decision was made}",
+      "",
+      "### Alternatives Considered",
+      "${6:What else was considered}",
+      "",
+      "### Consequences",
+      "${7:What this means going forward}",
+      "",
+      "---"
+    ]
+  },
+  "New Pattern": {
+    "prefix": "pattern",
+    "description": "Add a new code pattern to PATTERNS.md",
+    "body": [
+      "## Pattern: ${1:Pattern Name}",
+      "",
+      "**When to use:** ${2:When this pattern applies}",
+      "",
+      "```typescript",
+      "${3:// code example}",
+      "```",
+      "",
+      "**Real example:** `${4:src/path/to/example.ts}`",
+      "",
+      "---"
+    ]
+  },
+  "New Anti-Pattern": {
+    "prefix": "antipattern",
+    "description": "Add a new AI guardrail to ANTI-PATTERNS.md",
+    "body": [
+      "## ❌ ${1:Anti-pattern title}",
+      "",
+      "**Why it's wrong here:** ${2:Reason}",
+      "**Instead:** ${3:What to do instead}",
+      "**AI often does this when:** ${4:Trigger scenario}",
+      "",
+      "```typescript",
+      "// ❌ Wrong",
+      "${5:bad example}",
+      "",
+      "// ✅ Right",
+      "${6:good example}",
+      "```",
+      "",
+      "---"
+    ]
+  }
+}
